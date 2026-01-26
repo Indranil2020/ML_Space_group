@@ -291,7 +291,7 @@ Because:
 ✔ This ensures **plug-and-play compatibility**.
 
 
-# 🧠 One-Line Defense (You *will* be asked this)
+# 🧠 One-Line Defense 
 
 > *“Our dataset construction exactly follows the preprocessing protocols used in CrabNet and Roost: composition-only inputs, lowest-energy polymorph per formula, MP-derived formation energies, and hull-based stability labeling.”*
 
