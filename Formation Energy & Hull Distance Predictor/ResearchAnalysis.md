@@ -102,7 +102,7 @@
 
 ### Formation Energy (MP)
 
-* **MAE = 0.0296 eV/atom**
+* **MAE = 0.077 eV/atom**
 
 📍 **Page 6, Table 1**
 
@@ -382,7 +382,7 @@
 
 | Model            | Structure Needed | FE MAE (eV) | Page |
 | ---------------- | ---------------- | ----------- | ---- |
-| CrabNet          | ❌                | **0.0296**  | p6   |
+| CrabNet          | ❌                | **0.077**  | p6   |
 | Roost (ensemble) | ❌                | **0.0241**  | p4   |
 | CGCNN            | ✅                | 0.039       | p5   |
 | MEGNet           | ✅                | 0.028       | p3   |

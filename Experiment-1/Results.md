@@ -224,8 +224,8 @@ This section presents the experimental results for space group prediction obtain
          220       0.67      0.78      0.72        18
 
     accuracy                           0.49     10364
-   macro avg       0.38      0.32      0.34     10364
-weighted avg       0.48      0.49      0.48     10364
+    macro avg       0.38      0.32      0.34     10364
+    weighted avg    0.48      0.49      0.48     10364
 
 
 
@@ -244,8 +244,7 @@ weighted avg       0.48      0.49      0.48     10364
 
 ### Classification Report
 
-   precision    recall  f1-score   support
-
+                precision    recall  f1-score   support
            0       0.85      0.44      0.58       924
            1       0.51      0.14      0.22       569
            2       0.05      0.33      0.09        21
@@ -348,8 +347,8 @@ weighted avg       0.48      0.49      0.48     10364
          220       0.29      0.94      0.44        18
 
     accuracy                           0.42      9894
-   macro avg       0.34      0.51      0.38      9894
-weighted avg       0.52      0.42      0.43      9894
+    macro avg       0.34      0.51      0.38      9894
+    weighted avg    0.52      0.42      0.43      9894
 
 
 
@@ -371,8 +370,8 @@ weighted avg       0.52      0.42      0.43      9894
 MLP Results
 Accuracy: 0.3864
 Macro F1: 0.22690249482728847
-              precision    recall  f1-score   support
-
+                
+                precision    recall  f1-score   support
            0       0.54      0.69      0.61       919
            1       0.23      0.32      0.27       552
            2       0.12      0.05      0.07        21
@@ -582,8 +581,8 @@ Macro F1: 0.22690249482728847
          220       0.53      0.59      0.56        17
 
     accuracy                           0.39     10000
-   macro avg       0.27      0.22      0.23     10000
-weighted avg       0.38      0.39      0.37     10000
+    macro avg       0.27      0.22      0.23     10000
+    weighted avg    0.38      0.39      0.37     10000
 
 
 
