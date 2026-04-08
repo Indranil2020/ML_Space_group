@@ -1,18 +1,19 @@
 # REVIEW
 
+
 ---
 
-## 0. GENERAL IMPRESSIONS — LLM-GENERATED WRITING
+## 0. OVERALL — THIS READS LIKE LLM-GENERATED TEXT
 
-The writing throughout this paper has heavy LLM usage:
+The whole paper sounds like it was written by LLM. Here is how I can tell:
 
-- Excessive hedging phrases ("it is ensured that", "in order to", "has been developed to")
-- Formulaic paragraph structures (claim -> because of this -> therefore)
-- Superficial descriptions that sound authoritative but lack technical depth
-- Repeated use of filler phrases like "comprehensive", "scalable", "modular and interpretable"
-- The Discussion section (Sec. V.G) is essentially a rephrased abstract — a classic LLM pattern
+- Too many filler phrases like "it is ensured that", "in order to", "has been developed to"
+- Every paragraph follows the same pattern: claim, then "because of this", then "therefore"
+- Sounds confident but says nothing deep
+- Words like "comprehensive", "scalable", "modular and interpretable" are repeated everywhere
+- The Discussion (Sec. V.G) just says the same things as the Abstract again
 
-**Rewrite this paper in your own voice with genuine technical depth.**
+**You must rewrite the paper in your own words with real technical depth.**
 
 ---
 
@@ -20,534 +21,477 @@ The writing throughout this paper has heavy LLM usage:
 
 > "A Composition-Driven Machine Learning Framework for Crystal Structure Generation via Prediction of Formation Energy, Stability, Volume, Space Group, and Wyckoff Configurations"
 
-**CRITICAL FLAW:** The title says **"Crystal Structure Generation"** but the paper **never actually generates a crystal structure**. There is no CIF file produced, no atomic coordinates generated, no structure relaxed or validated against DFT. The paper predicts *descriptors* of crystal structures (space group, volume, Wyckoff letters). Predicting descriptors is NOT generation. This is a **misleading title** that overpromises. The paper should be titled something like *"Composition-Driven Prediction of Thermodynamic and Structural Descriptors of Crystalline Materials"* — honest and accurate.
+**Big problem:** The title says "Crystal Structure Generation" but you never generate any crystal structure in this paper. There is no CIF file. No atomic coordinates. No DFT check on a generated structure. You only predict some properties like space group, volume, and Wyckoff letters. Predicting properties is NOT the same as generating a structure.
 
-**Question:** Can you show me even ONE generated crystal structure from your framework? A CIF file? Atomic coordinates? If not, remove "Generation" from the title.
+Maybe we have done something like this: *"Predicting Thermodynamic and Structural Properties of Crystals from Composition Using Machine Learning"*
+
+**Question:** Show me one crystal structure your framework made. A CIF file? Coordinates? If you cannot, take "Generation" out of the title.
 
 ---
 
-## 2. ABSTRACT 
+## 2. ABSTRACT
 
 > "The challenge of finding stable crystalline materials has been one of the major challenges in computational materials science"
 
-- **Redundancy:** "challenge...challenges" in the same sentence. Poor writing.
+- You wrote "challenge...challenges" in one sentence. Fix the repetition.
 
 ---
 
-> "...and is typically solved with expensive first-principle calculations and crystal structure prediction methods."
+> "...typically solved with expensive first-principle calculations and crystal structure prediction methods."
 
-- **Error:** "first-principle" should be **"first-principles"** (plural). This is a standard term.
-- **Conceptual error:** First-principles calculations do NOT "solve" the challenge of finding stable materials. DFT computes properties of a *given* structure. Crystal Structure Prediction (CSP) methods like evolutionary algorithms (USPEX, CALYPSO) or random structure search (AIRSS) are what search for stable structures. These are different things conflated into one sentence.
-
----
-
-> "...however, the majority of methods have been either reliant upon known crystal structures for input, or focused only on isolated prediction tasks."
-
-- **Vague and sweeping:** Which methods? This is an error of an entire field without specifics. Many composition-only methods exist (Goodall & Lee 2020, CrabNet, Roost, etc.).
+- It should be **"first-principles"** (with an s). This is a basic term in our field.
+- Also wrong: DFT does not "solve" the problem of finding stable materials. DFT calculates properties for a structure you already have. CSP methods like USPEX or AIRSS are what actually search for stable structures. These are two different things mixed into one sentence.
 
 ---
 
-> "We have trained and evaluated regression and classification models for all of these tasks using a curated dataset from the Materials Project, and demonstrated competitive performance across all phases of the analysis"
+> "...the majority of methods have been either reliant upon known crystal structures for input, or focused only on isolated prediction tasks."
 
-- **"Competitive" with what?** There is NO comparison with state-of-the-art baselines anywhere in this paper. You cannot claim "competitive performance" without benchmarking against published results (e.g., Goodall & Lee 2020 [Ref 4], CrabNet, Roost, ALIGNN). This is a **major flaw**.
-
----
-
-> "...including good accuracy for space group prediction and reasonable recall for certain Wyckoff patterns, despite the large and unbalanced label space."
-
-- **"Good accuracy" and "reasonable recall"** are subjective, unquantified weasel words in an abstract. **State the numbers.**
+- Which methods? Name them. This is too vague.
 
 ---
 
-> "Furthermore, we describe how to combine the results from the various predictions to propose likely crystal structure candidates"
+> "...demonstrated competitive performance across all phases of the analysis"
 
-- **Where?** The paper never actually does this in a concrete, validated way. Section IV.G hand-waves about "physically conditioned Wyckoff blueprint representation" but there is zero validation that any proposed structure is physically real.
-
----
-
-> "Overall, this modular and interpretable framework provides a scalable approach for rapid screening and design of novel materials, bridging the gap between composition-based prediction and crystal structure generation."
-
-- Pure LLM filler. "Modular", "interpretable", "scalable", "bridging the gap" — **none of these claims are substantiated in the paper.** Where is the interpretability analysis? Where is the scalability benchmark? Where is the gap actually bridged? What is interpretable about an ensemble of transformer models and XGBoost?
+- **"Competitive" compared to what?** You never compare your results to any published work in this paper. Without a comparison, this word means nothing.
 
 ---
 
-## 3. INTRODUCTION (Section I) — Paragraph-by-Paragraph Critique
+> "...good accuracy for space group prediction and reasonable recall for certain Wyckoff patterns"
+
+- "Good" and "reasonable" are vague. Put the actual numbers in the abstract.
+
+---
+
+> "...we describe how to combine the results from the various predictions to propose likely crystal structure candidates"
+
+- Where do you do this? I do not see any actual structure built or tested anywhere in the paper.
+
+---
+
+> "Overall, this modular and interpretable framework provides a scalable approach..."
+
+- LLM filler words. What makes it "interpretable"? You use transformer ensembles and XGBoost — where is the interpretation? What makes it "scalable"? You never test scalability.
+
+---
+
+## 3. INTRODUCTION (Section I)
 
 > "The development of innovative crystalline materials is key for ongoing growth in technology such as energy storage, electronics, catalysis and structural engineering."
 
-- Generic textbook opening. Says nothing specific to motivate this particular work.
+- Generic opening. Every materials science paper starts like this. Say something specific about YOUR work.
 
 ---
 
 > "One of the foremost challenges in materials science is accurately predicting both the thermodynamic stability and crystal structure of a material based on its chemical makeup alone."
 
-- **Physics question:** Why is this a challenge? The students should explain *why* composition-to-structure mapping is fundamentally ill-defined — the same composition can adopt MULTIPLE crystal structures (**polymorphism**). NaCl vs. CsCl-type structures for the same stoichiometry class, for instance. Carbon can be diamond (Fd-3m) or graphite (P6_3/mmc). **The paper never acknowledges polymorphism, which is a fatal conceptual gap for a paper claiming to predict crystal structures from composition.**
+- You need to explain WHY this is hard. The main reason is **polymorphism** — the same chemical formula can form different crystal structures. Carbon makes diamond AND graphite. SrTiO3 can be cubic or tetragonal. **Your paper never talks about polymorphism at all.** This is a serious gap.
 
 ---
 
-> "...composition-based mrethod, have shown success at predicting properties such as formation energies, band gaps, and thermodynamic stabilities."
+> "...composition-based mrethod..."
 
-- **Typo:** "mrethod" — basic proofreading failure.
+- **Typo:** "mrethod" should be "method". Proofread your manuscript.
 
 ---
 
-> "However, many current techniques utilize known crystal structures as inputs or attempt to predict single properties independently. Because of this, these techniques cannot be used during the early stages of discovering new materials when only the chemical composition is known [3], [4], [5], [6]."
+> "However, many current techniques utilize known crystal structures as inputs... [3], [4], [5], [6]."
 
-- **Incorrect/misleading:** References [3] (CrabNet) and [4] (Goodall & Lee / Roost) are **COMPOSITION-ONLY models**. They do NOT require crystal structure as input. The students are citing papers that directly contradict their own claim. **This suggests they did not actually read these references.**
+- **Wrong:** References [3] and [4] are composition-only models. They do NOT need crystal structures as input. You are citing papers that go against your own claim. Did you actually read these papers?
 
 ---
 
 > "Crystal structures can be described on a compact basis in terms of multiple thermodynamic or structural descriptors, including formation energy, energy above hull, lattice volume, space group symmetry, and Wyckoff positions."
 
-- **Physics error:** Formation energy and energy above hull are **NOT "descriptors" of a crystal structure**. They are thermodynamic properties. A crystal structure is described by its lattice parameters, space group, and atomic positions (Wyckoff sites). Mixing thermodynamic quantities with structural descriptors shows **conceptual confusion** about what a crystal structure actually *is*. This sentence should be split: thermodynamic properties characterize stability; structural descriptors characterize geometry.
+- **Wrong physics:** Formation energy and energy above hull are NOT crystal structure descriptors. They are thermodynamic properties. A crystal structure is defined by lattice parameters, space group, and atomic positions. You are mixing up two different things here.
 
 ---
 
 > "These descriptors characterize the stability, symmetry, and atomic arrangement of crystalline materials [7], [8], [9], [10]."
 
-- References [7]-[10] are all about space group/symmetry prediction, not about characterizing stability. **Citation mismatch.**
+- Refs [7]-[10] are about space group prediction, not about stability. Wrong citations.
 
 ---
 
-> "Simultaneous prediction of these properties is challenging due to the need to perform both regression and classification tasks; the highly unbalanced label spaces for symmetry and Wyckoff positions; and the existence of highly non-linear relationships between composition and material functionalities [13], [14]."
+> "Simultaneous prediction of these properties is challenging due to the need to perform both regression and classification tasks..."
 
-- The challenge is **NOT** that you need "both regression and classification." That's a trivial ML implementation detail. The actual challenge is the **fundamental non-uniqueness of the composition-to-structure mapping** and the fact that composition-only features cannot distinguish polymorphs. The students are describing ML engineering challenges, not the actual scientific challenges.
+- Doing both regression and classification is not hard — any ML engineer can do that. The real challenge is that the same composition can give many different structures (polymorphism). You are talking about the wrong challenge.
 
 ---
 
 ### Contributions List (p.2):
 
-> "1) We develop a multi-task, composition-derived machine learning framework for simultaneous prediction of formation energy, energy above hull, and thermal stability."
+> "1) ...simultaneous prediction of formation energy, energy above hull, and thermal stability."
 
-- Formation energy and energy above hull are **NOT independent**. E_hull is derived from formation energies of competing phases on the convex hull. Stability is a binary label derived from energy above hull. **Predicting all three "simultaneously" from the same model is essentially predicting the same thing three times.** The authors never discuss this redundancy. Did the students check the correlation between these targets? If they are highly correlated, multi-task learning gains are trivially explained by shared signal, not by the framework being clever.
-
----
-
-> "2) We introduce a physics-informed volume prediction model with uncertainty estimation for predicting lattice volume from composition."
-
-- **"Physics-informed" is a strong claim and it is misused here.** Using mean atomic radius and electronegativity as features is NOT physics-informed modeling. Physics-informed means incorporating physical laws/constraints into the model architecture or loss function (e.g., equivariance, conservation laws, PINN-style). Using physically meaningful features is just "good feature engineering" — every Magpie-based model does this.
+- These three things are NOT independent. Energy above hull comes FROM formation energies. Stability is just a yes/no version of energy above hull. You are basically predicting the same thing three times. Did you check how correlated these targets are?
 
 ---
 
-> "5) The prediction models will also provide uncertainty quantification and risk control to give a higher level of reliability for materials discovery efforts."
+> "2) We introduce a physics-informed volume prediction model..."
 
-- Note the tense switch from "We develop" (past) to **"will also provide" (future)**. This inconsistency suggests the contributions were written aspirationally, not based on completed work. **Is this actually done or is it a plan?**
+- Using atomic radius and electronegativity as features is NOT "physics-informed." That term means putting physical laws into your model (like in PINNs). You just used good features. Every Magpie-based model does this.
 
 ---
 
-> "6) The proposed framework provides a scalable approach for connecting chemical composition to crystal structure descriptors without requiring crystal structure prediction or DFT calculations."
+> "5) The prediction models will also provide uncertainty quantification..."
 
-- This is the same as contribution (1) rephrased. Not a separate contribution.
+- Why is this in future tense ("will also provide")? The rest is in past tense. Was this done or not?
+
+---
+
+> "6) ...a scalable approach for connecting chemical composition to crystal structure descriptors..."
+
+- This is the same as contribution (1) said in different words. Not a new contribution.
 
 ---
 
 ## 4. DATASET AND PREPROCESSING (Section II)
 
-### Section II.A — Dataset Construction:
+### Section II.A:
 
-> "The Materials Project is considered a well-established and widely used resource for data-driven research in materials science as it provides a number of density of functional theory (DFT) calculated properties"
+> "...density of functional theory (DFT) calculated properties"
 
-- **Error:** "density of functional theory" should be **"density functional theory."** Embarrassing for a paper about computational materials science.
+- **Wrong:** It is "density functional theory", not "density of functional theory." This is embarrassing for a paper about computational materials science.
 
-**Question for students:** What version/API version of the Materials Project did you use? How many total entries before filtering? This is essential for reproducibility and is completely missing.
-
-- The dataset size is never stated here. We later learn it's ~150,200 for thermodynamic properties, ~101,579 for space groups, ~210,579 for Wyckoff, and ~151,816 for volume. **Why are these numbers all different?** If there's a master dataset from Materials Project, how did filtering produce four datasets of different sizes? This is never explained. Did different cleaning steps remove different entries? Were some entries added? This is extremely confusing and suggests sloppy data management.
-
----
-
-### Section II.B — Data Cleaning:
-
-> "3) Filtering of rare Wyckoff patterns: Wyckoff configurations that occur infrequently have been removed to address class imbalance and to improve the generalization of the models."
-
-- **CRITICAL ML FLAW:** Removing rare classes does NOT "improve generalization" — it just **makes the problem easier by avoiding hard cases** and makes your metrics look better. If your model is supposed to be used for "novel materials discovery," those novel materials are precisely the ones likely to have rare/unusual Wyckoff configurations. You've optimized for easy cases and thrown away the hard, scientifically interesting ones.
-- **Question:** How many unique Wyckoff configurations were removed? What fraction of the dataset? What was the filtering threshold? None of this is reported.
+**Questions:**
+- What version of the Materials Project API did you use?
+- How many entries were there before filtering?
+- These details are needed so others can repeat your work. They are missing.
 
 ---
 
-> "4) Consistency checks: Alignment between element lists and fractional compositions; Verification of element-Wyckoff mapping; Removal of duplicate or inconsistent entries"
-
-- How were duplicates defined? Same composition? Same composition + same space group? Materials Project has many **polymorphs** — same composition, different structures. Were polymorphs handled? **This is a critical data leakage concern**: if NaCl appears in both rock salt (Fm-3m) and CsCl-type (Pm-3m) structures, how is this handled during train/test split? The authors are silent on this.
+- Later I find out the dataset sizes are: 150,200 (thermodynamic), 101,579 (space group), 210,579 (Wyckoff), 151,816 (volume). **Why are these all different?** You say they come from one master dataset, but the numbers do not match. Never explained.
 
 ---
 
-### Section II.C — Target Variable Preparation:
+### Section II.B:
 
-> "Stability label: Materials were classified as stable if their energy above hull was below a predefined threshold (typically close to 0 eV), and unstable otherwise."
+> "Filtering of rare Wyckoff patterns... to improve the generalization of the models."
 
-- **"Typically close to 0 eV" is unacceptable.** What is the actual threshold? 0 eV? 0.01 eV? 0.025 eV? 0.1 eV? This matters enormously. At 0 eV, only ground-state hull entries are "stable." At 0.1 eV/atom, you include many metastable phases. The choice of threshold directly affects class balance and the meaning of the stability prediction. **State the exact number.**
+- **Wrong ML thinking.** Removing rare classes does not make your model better. It just makes the problem easier and your numbers look better. If your goal is to discover new materials, those new materials will likely have unusual Wyckoff patterns — exactly the ones you threw away.
+- How many classes did you remove? What was the cutoff? Not reported.
 
 ---
 
-### Section II.E — Dataset Splitting:
+> "Removal of duplicate or inconsistent entries"
 
-> "A standard split of 80:20 training to testing has been applied..."
+- How did you define "duplicate"? Same formula? Same formula AND same space group? The Materials Project has many polymorphs (same formula, different structures). How did you handle those? This matters a lot for data leakage.
 
-- But later in Section V.A, they say "split into training (80%), validation (10%), and test (10%) sets." **Which is it? 80/20 or 80/10/10?** This is a **direct contradiction**.
+---
+
+### Section II.C:
+
+> "Materials were classified as stable if their energy above hull was below a predefined threshold (typically close to 0 eV)"
+
+- **What is the actual number?** 0 eV? 0.01 eV? 0.1 eV? Each choice gives a very different result. "Typically close to 0" is not good enough for a scientific paper.
+
+---
+
+### Section II.E:
+
+> "A standard split of 80:20 training to testing"
+
+- But in Section V.A you say 80/10/10 (train/validation/test). **Which one is true?** You cannot say both.
 
 ---
 
 > "No data leakage between training and testing sets"
 
-- **How was this ensured?** Many Materials Project entries are polymorphs or closely related compositions. Did you check for duplicate/near-duplicate compositions across splits? Did you do a **composition-based split** or a random split? A random split with similar compositions in train and test would give inflated metrics. This is a well-known issue (see Bartel et al., "A critical examination of compound stability predictions from machine-learned formation energies") and the students completely ignore it.
+- How do you know? Did you check for similar compositions in both sets? A random split can put Fe2O3 in training and Fe3O4 in testing — they share very similar Magpie features. This is a known problem (see Bartel et al.) and you ignore it.
 
 ---
 
 ## 5. FEATURE ENGINEERING (Section III)
 
-### Section III.B & C — Elemental Property Descriptors and Magpie:
+> "Elemental properties considered include: ... Electron affinity, etc."
 
-> "Elemental properties considered include: Atomic number, Atomic weight, Electronegativity, Atomic radius, Covalent radius, Valence electron count, Ionization energy, Electron affinity, etc."
-
-- **"etc." is unacceptable in a scientific paper.** List ALL features or provide a complete table.
+- Do not write **"etc."** in a scientific paper. List all features or give a complete table.
 
 ---
 
-> "The set of these descriptors was developed to encapsulate the statistical distribution of elemental characteristics in each chemical composition..."
+> "...approximately 130-140 compositional descriptors"
 
-- Developed by whom? This sounds like the authors invented these descriptors, but they're standard **Magpie features from Ward et al. (2016)**. The phrasing is misleading and borderline plagiaristic.
-
----
-
-> "Magpie descriptors were used to create feature vectors... this produces approximately 130-140 compositional descriptors [3], [4], [11]"
-
-- **"Approximately 130-140"** — You should know the **EXACT** number. Magpie produces exactly 132 features (or a specific fixed number depending on the implementation). This vagueness suggests the students don't actually know what features their model is using. This is alarming. Check your code and state the exact number.
-- Later in Section IV.D, the paper says "138 features." **Be consistent.**
+- **You should know the exact number.** Is it 130? 132? 138? 140? Later you say 138. Pick one and be consistent. Not knowing your own feature count is a bad sign.
 
 ---
 
-### Section III.D — Feature Normalization:
+> "The set of these descriptors was developed to encapsulate the statistical distribution..."
 
-> "Feature scaling was applied before training the models, allowing every feature to contribute to the learning process by having equal contributions to the model's final output."
+- This sounds like you invented these features. You did not. These are standard Magpie features from Ward et al. (2016). Give credit.
 
-- **This statement is physically wrong.** Standardization does NOT make features contribute equally to the output. It merely puts them on a comparable scale for gradient-based optimization. A feature with zero predictive power will still contribute zero regardless of scaling.
-- **Also:** For tree-based models (Random Forest, XGBoost), standardization is unnecessary — yet the paper uses these models extensively. Did you standardize features before feeding them to tree-based models? If so, why? If not, this paragraph is misleading.
-- **Critical question:** Was the scaler fitted on the entire dataset or only the training set? If fitted on the entire dataset (including test), **that's data leakage**. This detail is missing.
+---
+
+> "Feature scaling... allowing every feature to contribute... by having equal contributions to the model's final output."
+
+- **Wrong.** Scaling does NOT make all features contribute equally. It just puts them on similar scales for training. A useless feature stays useless after scaling.
+- Also: tree-based models (Random Forest, XGBoost) do not need scaling. You use these models a lot. Did you scale features for them too? If so, why?
+- **Important:** Did you fit the scaler on the whole dataset or just the training set? If the whole dataset, that is data leakage.
 
 ---
 
 ## 6. METHODOLOGY (Section IV)
 
-### Section IV.A — Overview and Equation (1):
+### Section IV.A — Equation (1):
 
 > C -> {E_f, E_hull, S, V_atom, SG, W}
 
-- **Fundamental physics problem:** This mapping is NOT well-defined. A single composition C can map to MULTIPLE crystal structures (**polymorphism**). SrTiO3 can be cubic (Pm-3m) or tetragonal (I4/mcm). Carbon can be diamond (Fd-3m) or graphite (P6_3/mmc). Your framework predicts a SINGLE space group for each composition, which is physically incorrect.
-- **Question:** How do you handle polymorphs in your dataset? If you kept multiple entries per composition, you have data leakage. If you kept only one, which one did you keep and why?
-- **Also:** This notation implies a single model maps composition to all outputs. But the paper uses **four separate models**. This equation misrepresents the actual architecture.
+- **Physics problem:** This equation says one composition gives one set of outputs. But one composition can give MANY different crystal structures (polymorphism). Carbon gives diamond AND graphite. This equation is wrong.
+- Also: you use four separate models, not one. This equation makes it look like one model does everything. Misleading.
 
 ---
 
-### Section IV.B — Multi-Task Thermodynamic Prediction Model:
+### Section IV.B — Multi-Task Model:
 
-> Equation (3): z = Sum f_i * E(e_i)
+> Equation (3): z = Sum of f_i * E(e_i)
 
-- This is fraction-weighted element embedding pooling — essentially the same as Roost/CrabNet-style composition representations, **but without the attention mechanism** that makes those models powerful. **No citation or acknowledgment** to prior work that introduced this exact idea (e.g., Goodall & Lee [4], which IS in the references but not cited here).
-- **Fundamental limitation:** No interaction terms between elements. This means the model cannot capture, for example, the difference between an ordered alloy and a random alloy with the same composition. For crystal structure prediction, this is a severe limitation because the same composition (e.g., ABO3) can form perovskite, ilmenite, corundum, etc., depending on the specific elements and their interactions.
+- This is a simple weighted average of element embeddings. It is like what Roost and CrabNet use, but simpler (no attention). You do not cite these papers here even though [4] is in your reference list.
+- **Problem:** No interaction terms between elements. The model cannot tell the difference between compositions where element interactions matter (like perovskites ABO3 that can form many different structures depending on which A and B elements are used).
 
 ---
 
 > Equation (6): L = L_FE + L_hull + L_stab
 
-- **No task weighting.** The three losses have very different scales (MSE in eV^2 vs. binary cross-entropy in nats). Adding them without weighting coefficients means the optimization is dominated by whichever loss has the largest magnitude. This is a **basic multi-task learning mistake**. Did you use any task balancing strategy (uncertainty weighting, GradNorm, etc.)? If not, your multi-task model is almost certainly suboptimal.
+- **No weights on the losses.** These losses have very different scales (MSE vs cross-entropy). Without weights, one loss will take over training and the others will be ignored. This is a basic multi-task learning mistake.
 
 ---
 
-### Section IV.B.3 — Model Variants:
+### Section IV.B.3 — Six Model Variants:
 
-This section lists TC-MTL, LTC-MTL, E-TC-MTL, O-LTC-MTL, FB-MTL, UQ-MTL — **six model variants** with no clear justification for why so many were needed. This reads like the students tried everything and reported all of it, rather than having a principled model development strategy.
+You list TC-MTL, LTC-MTL, E-TC-MTL, O-LTC-MTL, FB-MTL, UQ-MTL — six models. Why so many? Where is the reasoning for each one?
 
-**Questions for students:**
-- What was your hypothesis?
-- Why did you expect transformers to help?
-- What ablation study justifies each variant?
-- Where are the learning curves?
-- Where is the evidence that multi-task learning actually helps compared to single-task models? There is no ablation showing the benefit of multi-task vs. single-task.
+**Questions:**
+- What was your hypothesis for each?
+- Where is the ablation study?
+- Where is proof that multi-task learning helps? You never show a single-task baseline.
 
 ---
 
-### Section IV.C — Volume per Atom Prediction Model:
+### Section IV.C — Volume Model:
 
-> Architecture: Element embedding layer, Composition encoder, Physics feature encoder, Fusion network, Mean and variance prediction heads
+- The architecture is complex but **no details are given**. How many layers? What activations? What dimensions? Without these, nobody can reproduce your work.
 
-- This is a fairly complex architecture. **Where is the architecture diagram?** How many layers? What activation functions? What embedding dimensions? Dropout? Batch normalization? **None of these critical details are provided.** The paper is unreproducible.
+> Equation (12): Gaussian negative log-likelihood loss
 
----
-
-> Equation (12): L = (y-mu)^2 / (2*sigma^2) + (1/2) * log(sigma^2)
-
-- **Question:** How do you prevent the model from collapsing sigma -> infinity to minimize the loss? The log sigma^2 term penalizes this, but in practice, without careful initialization and constraints, heteroscedastic models can be unstable. No training details are provided. Was the sigma prediction constrained to be positive (e.g., via softplus)? Was any loss warm-up used?
+- How do you stop sigma from blowing up? No training details given.
+- **Simple baseline missing:** Volume per atom is closely related to atomic radius. Did you try a simple formula like V ~ (4/3)*pi*r^3 using average atomic radius? If your ML model barely beats this, the ML is not adding much.
 
 ---
 
-- **Physics question:** Volume per atom is strongly correlated with atomic radius. A naive baseline of V_atom ~ (4/3)*pi*(Sum f_i * r_i)^3 would already give reasonable predictions. **Did you compare against this trivial physics baseline?** If your ML model barely beats a back-of-envelope estimate, the ML adds no value.
+### Section IV.D — Space Group Prediction:
+
+> "138 features"
+
+- Earlier you said "130-140". Now it is 138. Be consistent.
+
+> Table II: Random Forest, XGBoost, MLP, RF Ensemble, RF + Crystal System
+
+- Why these specific models? No reason given.
+- **Where is the comparison with published results?** You cite Zhao et al. [7] and Venkatraman & Carvalho [8,10] who report their own accuracies. You must compare against them.
+- MLP gets only 38.6%. Very low — suggests bad tuning or a bug.
 
 ---
 
-### Section IV.D — Space Group Prediction Model:
+> "Crystal System Constraint: A separate model predicts the crystal system..."
 
-> "Space group prediction is formulated as a multi-class classification problem using Magpie composition descriptors (138 features)."
-
-- Earlier you said "approximately 130-140" features. Now it's 138. **Be consistent.**
+- What model? What is its accuracy? If it gets the crystal system wrong, you throw away the correct space group. **How often does this happen?** Never checked.
 
 ---
 
-> Table II lists: Random Forest, XGBoost, MLP, RF Ensemble, RF + Crystal System
+### Section IV.E — Wyckoff Prediction:
 
-- **Why these specific models?** No justification. Why not logistic regression as a baseline? Why specifically two RF variants?
-- **Where are the state-of-the-art models?** Zhao et al. [7] and Venkatraman & Carvalho [8,10] — which you cite — report specific accuracies. You MUST compare against them directly. Just listing your own models without comparing to published results is unacceptable.
-- The MLP achieves only 38.6% — this is suspiciously low and suggests either a bug, poor hyperparameter tuning, or inadequate training.
+> Table III: LightGBM, XGBoost, Multi-label binary classifiers
 
----
-
-> "Crystal System Constraint: A separate model predicts the crystal system, and space groups inconsistent with the predicted crystal system are removed."
-
-- **Interesting idea but poorly described.** What model predicts the crystal system? What is its accuracy? If the crystal system prediction is wrong, you've now ELIMINATED the correct space group from the candidate set. **What is the error propagation?** How often does a wrong crystal system prediction lead to eliminating the true space group? This critical failure mode is never analyzed.
-- This is also circular if the crystal system predictor is composition-based with the same features — you're just stacking two weak classifiers.
-
----
-
-### Section IV.E — Wyckoff Position Prediction Model:
-
-> Table III lists: LightGBM, XGBoost, Multi-label binary classifiers
-
-- **Only three models, all tree-based or binary.** No neural network approaches? No comparison with WyckoffDiff [14] or ShotgunCSP [1] — papers the students themselves cite?
+- Only tree-based models. No neural networks tried. No comparison with WyckoffDiff [14] or ShotgunCSP [1] that you cite.
 
 ---
 
 > Equation (14): P(w_i | C, SG)
 
-- **Critical question:** Is SG the TRUE space group or the PREDICTED space group? If you use the true space group at test time, your Wyckoff results are unrealistically optimistic. If you use the predicted space group (77.2% accurate), errors cascade. **Which is it? The paper is ambiguous.** This train-test mismatch likely inflates training performance and degrades test performance. Was this discrepancy measured?
+- **Big question:** Is SG the true space group or the predicted one? If you use the true space group during testing, your results are too good to be real. If you use the predicted one (77.2% accurate), errors pile up. Which one did you use? The paper does not say.
 
 ---
 
-### Section IV.F — Separation of ML and Physics-Based Structure Construction:
+### Section IV.F — "Structure Construction":
 
-> "Instead of predicting atomic coordinates directly, the model predicts space group symmetry, Wyckoff positions, and lattice volume, and atomic coordinates are generated analytically from symmetry operations."
+> "...atomic coordinates are generated analytically from symmetry operations."
 
-- **This is NOT possible with the information you predict.** Wyckoff positions have free parameters (e.g., in space group Pm-3m, Wyckoff position 24k has parameters (0, y, z) with y, z as free variables). You predict Wyckoff **LETTERS**, not the free parameters. Without the free parameters, you CANNOT generate atomic coordinates.
-- To go from Wyckoff letters to actual coordinates, you need:
-  1. The specific Wyckoff site (not just the letter, but the multiplicity and site symmetry)
-  2. The free parameters (x, y, z) for general positions
-  3. The lattice parameters (a, b, c, alpha, beta, gamma) — not just volume
-- **This is a fundamental crystallographic error that invalidates the central claim of the paper.**
+- **This does not work.** Wyckoff positions have free parameters. For example, in space group Pm-3m, Wyckoff position 24k has coordinates (0, y, z) where y and z are unknown numbers. You predict only the Wyckoff LETTER (like "a", "b", "k"), not these numbers. Without the free parameters, you cannot get atomic coordinates.
+- To build a crystal structure, you need:
+  1. Wyckoff site with its free parameters (x, y, z values)
+  2. All lattice parameters (a, b, c, alpha, beta, gamma) — not just volume
+- **This is a basic crystallography error. It breaks the main claim of your paper.**
 
 ---
 
-### Section IV.G — Physically Conditioned Wyckoff Blueprint Representation:
+### Section IV.G — "Wyckoff Blueprint":
 
 > "Lattice parameters are computed from predicted lattice volume and the crystal symmetry"
 
-- **PHYSICS ERROR:** You CANNOT determine all lattice parameters from volume alone, except for cubic systems (where a = V^(1/3)).
-  - For **tetragonal**, you need both a and c.
-  - For **orthorhombic**, you need a, b, and c.
-  - For **monoclinic**, you need a, b, c, and beta.
-  - For **triclinic**, you need a, b, c, alpha, beta, and gamma.
-- Volume gives you **ONE constraint**; non-cubic systems have **2-6 lattice parameters**.
-- **This is basic crystallography. This entire section is physically wrong for any non-cubic system.**
+- **Wrong for most crystal systems:**
+  - Cubic: OK, a = V^(1/3)
+  - Tetragonal: Need a AND c. Volume alone is not enough.
+  - Orthorhombic: Need a, b, AND c.
+  - Monoclinic: Need a, b, c, AND beta.
+  - Triclinic: Need a, b, c, alpha, beta, AND gamma.
+- Volume is ONE number. Non-cubic crystals need 2 to 6 numbers. **You cannot get multiple numbers from one number. This is basic crystallography and it is wrong here.**
 
 ---
 
 ## 7. RESULTS AND DISCUSSION (Section V)
 
-### Section V.A — Thermodynamic Property Prediction:
+### Section V.A — Thermodynamic Properties:
 
-> "The dataset consisted of 150,200 materials, which were split into training (80%), validation (10%), and test (10%) sets."
+> "150,200 materials... split into training (80%), validation (10%), and test (10%)"
 
-- **Contradicts** Section II.E which said 80/20 split.
+- Section II.E said 80/20 split. Now it is 80/10/10. **These do not match.**
 
 ---
 
-**Table IV — Thermodynamic Model Comparison:**
+**Table IV results:**
 
-| Metric | Best Value | Comment |
-|--------|-----------|---------|
-| Formation Energy MAE | 0.0975 eV/atom | State-of-the-art composition-only is ~0.028-0.05 eV/atom (Roost, CrabNet). **Your best is 2-3x worse than published baselines.** |
-| Hull Distance MAE | 0.059-0.075 eV | Many metastable materials have E_hull of 0.01-0.05 eV/atom. An MAE of ~0.06 eV means you **cannot reliably distinguish stable from marginally metastable** materials. |
-| Stability F1 | 0.9306 | **What is the class balance?** If 90% of materials are labeled one class, a naive majority classifier gets F1 ~0.95. Report precision, recall, and the class distribution. |
-
-- **No comparison to ANY published baseline.** Claims of "competitive" are unsubstantiated.
-- **No ablation** showing that multi-task learning helps vs. single-task models. You cannot claim multi-task learning helps without showing the single-task alternative.
+- **Formation Energy MAE = 0.0975 eV/atom:** Published composition-only models like Roost get ~0.028-0.05 eV/atom. Your best result is 2-3 times worse. You never mention this.
+- **Hull Distance MAE = 0.059-0.075 eV:** Many real metastable materials have E_hull of 0.01-0.05 eV/atom. Your error is bigger than the values you are trying to predict. This means you cannot tell stable from slightly unstable materials.
+- **Stability F1 = 0.93:** Sounds OK, but what is the class balance? If 90% of your data is one class, just guessing that class gives F1 ~ 0.95. Report precision, recall, and how many materials are in each class.
+- **No comparison to any published result.** Not acceptable.
+- **No proof that multi-task learning helps.** You never show single-task results.
 
 ---
 
 **Figure 2 (Parity plot):**
-- No reported R^2, MAE, or RMSE on the figure.
-- No indication of which model produced this plot.
-- The color scale (density) is unlabeled.
-- No error bars or confidence intervals.
-- Significant scatter at extreme values, especially for very negative formation energies (< -4 eV/atom). These outliers should be investigated and discussed.
+- No R^2 or MAE shown on the plot. Which model made this? Not stated. No color bar label. Big scatter at extreme values — not discussed.
+
+**Figure 3 (Uncertainty plot):**
+- Only ~50 data points shown. How were they picked? Looks cherry-picked.
+
+**Figure 4 (t-SNE of embeddings):**
+- No element labels anywhere. Just colored dots. This figure tells us nothing without labels.
+
+**Figure 5 (Error heatmap):**
+- Too small to read. Which elements have the biggest errors? Not named.
 
 ---
 
-**Figure 3 (Ensemble with uncertainty bounds):**
-- Only shows ~50 data points in a narrow range (DFT energy from -4 to 1 eV/atom, but Figure 2 goes to +/-5). Were the axes deliberately cropped to hide worse predictions?
-- Cherry-picked? How were these data points selected?
+### Section V.B — Uncertainty:
 
----
+> "The uncertainty-error correlation of 0.6396 indicates that prediction uncertainty is strongly correlated with prediction error."
 
-**Figure 4 (t-SNE of element embeddings):**
-- **No labels on any clusters.** The caption says "elements with similar chemical properties cluster together" but this is impossible to verify from the figure. Which elements are where? Are alkali metals together? Transition metals? Noble gases? **Without labels, this figure conveys zero scientific information. It's a colorful blob.**
-
----
-
-**Figure 5 (Element-wise error heatmap):**
-- Resolution too low to read any numbers or element symbols.
-- The text says "Higher errors are observed for elements with limited training data and complex bonding environments" but **which elements specifically? Rare earths? Actinides? Noble gases?** The students don't say.
-- Lanthanides/actinides typically have high errors due to strongly correlated electrons (DFT+U issues) — is that what we see? The figure is not discussed at all beyond one generic sentence.
-
----
-
-### Section V.B — Uncertainty Quantification:
-
-> Table V: Uncertainty-Error Correlation = 0.6396
-
-- **0.64 is NOT "strongly correlated."** In statistics and calibration literature, r = 0.64 is **moderate at best**. A well-calibrated uncertainty model should show correlation > 0.8. The students are overstating their result.
-- **Also:** What type of correlation? Pearson? Spearman? This matters for non-normal distributions.
+- **0.64 is NOT strong.** In calibration work, you want > 0.8 for "strong." 0.64 is moderate at best. Do not overstate your results.
+- What kind of correlation? Pearson? Spearman? Not stated.
 
 ---
 
 > "FE MAE @ 10% Coverage = 0.0446 eV/atom"
 
-- So if you cherry-pick the 10% most confident predictions, you get 0.0446 eV/atom. **This is still worse than the overall MAE of published composition-only methods on the full test set** (Roost ~0.028 eV/atom). This is not a strong result.
+- Even when you pick only your 10% most confident predictions, you get 0.0446 eV/atom. Published methods get better than this on the FULL test set. Not impressive.
 
 ---
 
-### Section V.C — Volume per Atom Prediction:
+### Section V.C — Volume Prediction:
 
-> Table VI: Test MAE = 0.640 A^3/atom, Uncertainty-Error Correlation = 0.52, Coverage within mu+/-sigma = 0.64
-
-- **Uncertainty-Error Correlation of 0.52 is POOR.** This means the model's uncertainty estimates are barely better than random for identifying unreliable predictions.
-- Coverage of 0.64 within +/-1sigma: for a Gaussian distribution, ~68% of points should fall within +/-1sigma. Getting 64% suggests the uncertainty is slightly overconfident but roughly calibrated. However, this detail is not discussed.
-- **MAE of 0.640 A^3/atom:** For a typical volume of ~10-20 A^3/atom, this is a ~3-6% error. Not terrible, but NOT good enough to determine lattice parameters for structure generation. A 5% volume error translates to ~1.7% error in lattice parameter (cube root), which for a = 4 A means ~0.07 A — **too large for meaningful structure prediction**.
-- **Missing baseline comparison:** What does a simple linear regression on mean atomic radius give? What does a periodic table lookup (average volume of constituent elements) give? Without these baselines, we can't assess if ML is adding value.
-
----
+- **MAE = 0.640 A^3/atom:** For typical volumes of 10-20 A^3/atom, this is a 3-6% error. For structure work, a 5% volume error gives ~1.7% error in lattice parameter. For a = 4 A, that is ~0.07 A error — too big for useful structure prediction.
+- **Uncertainty-Error Correlation = 0.52:** Weak. Your uncertainty estimates are barely useful.
+- **No baseline comparison.** What does a simple formula using average atomic radius give?
 
 **Figure 6 (Volume parity plot):**
-- Significant outliers at high volumes (>80 A^3/atom) where the model systematically underpredicts. This is not discussed. These large-volume materials (likely containing heavy elements or open framework structures) are scientifically important.
-
----
-
-**Figures 7, 8 (Uncertainty calibration for volume):**
-- Figure 7 shows one extreme outlier at sigma~3.3 with error~3.0. Is this one data point or a cluster? The rest of the data is compressed into a small region, making the plot hard to interpret.
-- Figure 8 (coverage vs accuracy) is presented without explanation of what it means or why the curve looks the way it does.
+- Big outliers at high volumes (>80 A^3/atom) — model underpredicts. Not discussed.
 
 ---
 
 ### Section V.D — Space Group Prediction:
 
-**Table VII — Space Group Model Comparison:**
-
-| Model | Top-1 | Top-3 | Top-5 |
-|-------|-------|-------|-------|
-| RF + Crystal System | 0.772 | 0.894 | 0.919 |
-
-- **Top-1 accuracy of 77.2% for 230 classes** sounds reasonable until you consider the extreme class imbalance shown in Fig. 9. The top few space groups (225-Fm-3m, 62-Pnma, 14-P2_1/c) dominate the dataset.
-- **What is the accuracy on rare space groups?** What is the **macro-averaged accuracy** (averaging equally across all classes)? A model that always predicts the top 5 space groups could achieve >50% top-1 accuracy on this dataset.
-- **Comparison:** Venkatraman & Carvalho (Ref [10]) report 80%+ top-1 accuracy on similar tasks. Your best model is worse. Again, "competitive" is not supported.
+**Table VII:**
+- **Top-1 accuracy = 77.2%:** Looks decent for 230 classes, but the data is very skewed (Fig. 9). A few space groups dominate. What is the accuracy on rare space groups? A model that always guesses the top 5 space groups could get >50%.
+- **Venkatraman & Carvalho [10] report >80%.** Your best is worse but you never mention this.
 
 ---
 
-> "Random Forest models outperform neural networks and gradient boosting models for this task."
+> "Random Forest models outperform neural networks..."
 
-- **Stated without any analysis of WHY.** Could it be that the RF is simply overfitting due to the high-cardinality Magpie features? Was hyperparameter tuning equivalent across models? The MLP achieves only 38.6% — this is suspiciously low and suggests either a bug, poor hyperparameter tuning, or inadequate training.
-
----
-
-> "The model systematically confuses structurally similar orthorhombic or monoclinic symmetries due to overlapping compositional features."
-
-- **This is the fundamental limitation the students never fully address:** Composition alone CANNOT distinguish between polymorphs or between closely related space groups that differ only in subtle structural distortions. This isn't a bug to fix — it's a **fundamental physical limitation** of the approach. The paper should discuss this honestly rather than burying it in one sentence.
+- You say this is because RF can learn non-linear patterns. **But neural networks can do that too.** The real reason is probably that tree models work better on tabular data, or that your neural network was badly tuned. MLP at 38.6% is very suspicious.
 
 ---
 
-**Figure 9 (Space group distribution):**
-- The x-axis labels are unreadable (rotated numbers that blur together). **How many of the 230 space groups actually appear in the dataset?** Not reported.
+> "The model systematically confuses structurally similar orthorhombic or monoclinic symmetries..."
 
-**Figure 10 (Feature importance):**
-- Feature names barely readable. **No discussion of what these features mean physically.** Why does "mean Column" dominate? What physical insight does this provide?
-
-**Figure 11 (Confusion matrix):**
-- Completely unreadable at this resolution. The axis labels are illegible. **This figure is not publication-ready by any standard.**
-
-**Figure 12 (Sensitivity/Specificity heatmap):**
-- Also nearly illegible. Color scheme makes it hard to distinguish values in print.
+- **This is the key finding but you bury it in one sentence.** This is not a bug — it is a basic limit of composition-only prediction. Many space groups cannot be told apart by composition alone. This needs a full paragraph of honest discussion.
 
 ---
 
-### Section V.E — Wyckoff Position Prediction:
+**Figure 9:** X-axis labels unreadable. How many of the 230 space groups are in your data? Not stated.
 
-**Table VIII — Wyckoff Model Comparison:**
+**Figure 10:** Feature names hard to read. No discussion of what they mean physically.
 
-| Model | Micro-F1 | Macro-F1 | Recall@3 | Recall@5 |
-|-------|----------|----------|----------|----------|
-| XGBoost | 0.85 | 0.73 | 0.81 | 0.92 |
+**Figure 11 (Confusion matrix):** Completely unreadable. Not ready for publication.
 
-- **The 12-point gap between Micro-F1 (0.85) and Macro-F1 (0.73)** confirms the model performs well on frequent Wyckoff letters and poorly on rare ones. Since rare Wyckoff positions are often the scientifically interesting ones, this is a significant limitation.
-- **Recall@K = 0.99 by K=13** means on average you need to predict 13 Wyckoff letters to capture the correct one. For a material with 3 Wyckoff sites, predicting 13 candidates means you haven't meaningfully narrowed the search space.
+**Figure 12 (Sensitivity/Specificity):** Also hard to read.
+
+---
+
+### Section V.E — Wyckoff Prediction:
+
+**Table VIII:**
+- **Micro-F1 = 0.85, Macro-F1 = 0.73:** The 12-point gap means the model works well on common Wyckoff letters but badly on rare ones.
+- **Recall@K = 0.99 at K=13:** You need 13 guesses to find the right answer. For a material with 3 Wyckoff sites, 13 guesses is not useful.
 
 ---
 
 > "The dataset contained 210,579 crystal structures"
 
-- This is the largest of the four datasets. How can there be more structures for Wyckoff prediction than for thermodynamic prediction (150,200)? Were additional materials included that don't have formation energies? **The dataset inconsistencies are never explained.**
+- This is bigger than the thermodynamic dataset (150,200). How? Not explained.
 
 ---
 
-**Figure 13 (Class imbalance and Recall@K):**
-- The class imbalance plot shows 'a' has >10^4 instances while some letters appear <10 times. **Yet the authors claim they "filtered rare Wyckoff patterns."** If letters appearing fewer than 10 times are still in the dataset, what was the filtering threshold? This contradicts the preprocessing description.
+**Figure 13:** Shows letters appearing <10 times. But you said you filtered rare patterns. What was the cutoff?
 
 ---
 
-### Section V.F — Overall Framework Summary:
+### Section V.F — Overall Summary:
 
-**Table IX reports the best model for each task:**
+**Table IX picks the best model for each task:**
 - Formation Energy: Uncertainty Ensemble
 - Hull Distance: Feature-Based MTL
-- Stability: Uncertainty Ensemble
 - Volume: UQ Volume Model
 - Space Group: RF + Crystal System
 - Wyckoff: XGBoost
 
-**Each task uses a DIFFERENT "best model."** This is not a "unified framework" — it's a **collection of independent models**. The students should be honest about this.
+Every task uses a different model. **This is NOT a unified framework.** It is a collection of separate models. Be honest about this.
 
 ---
 
-> "To rigorously evaluate the physical realism of our predicted Wyckoff configurations, we adopted the discrete probability validation method utilized in the ShotgunCSP framework."
+> "To rigorously evaluate the physical realism..."
 
-- **"Rigorously" is a strong word.** Comparing predicted Wyckoff letter frequencies to ground truth frequencies is NOT a rigorous validation of physical realism. A model that memorizes the frequency distribution without learning anything about composition-structure relationships would pass this test. Physical realism would require generating a structure, relaxing it with DFT, and checking if it remains in the predicted space group.
+- Comparing letter frequencies is NOT a rigorous test. A model that just memorizes the overall frequency pattern would pass this test. Real validation means: build a structure, relax it with DFT, check if it is correct.
 
 ---
 
 **Figure 14 (Wyckoff Letter Fidelity):**
-- The top panel shows that "hard prediction frequency" (green) severely over-predicts 'a' and under-predicts everything else.
-- The bottom panel shows frequency ratios ranging from 0 to 2.5, meaning some letters are over-predicted by 150% and others are entirely missed. **The +/-20% tolerance band shows that most letters fall OUTSIDE acceptable agreement.**
-- **The text claims "remarkably well" alignment. The figure DIRECTLY CONTRADICTS the text.**
+- Bottom panel shows ratios from 0 to 2.5. Some letters over-predicted by 150%, others missed. Most letters fall OUTSIDE the +/-20% tolerance band.
+- **The text says "remarkably well." The figure shows the opposite.**
 
 ---
 
 ### Section V.G — Discussion:
 
-This entire section is a **rehash of the results with no critical analysis**. Classic LLM output.
+This section just repeats the results in different words. No real thinking.
 
-**Issues that SHOULD be discussed but are NOT:**
+**Things that should be discussed but are missing:**
 
-1. **Polymorphism:** How does the framework handle compositions that adopt multiple structures?
-2. **Error propagation:** What happens when errors in one stage (e.g., space group at 77.2%) cascade to later stages (e.g., Wyckoff)?
-3. **Comparison with baselines:** How do your results compare to published benchmarks?
-4. **Limitations:** What types of materials/structures does the framework fail on?
-5. **Physical validation:** Has even ONE predicted structure been validated by DFT?
-
----
-
-> "Tree-based models achieved higher prediction accuracy compared to neural networks when predicting space group's symmetry due to the ability to learn the non-linear relationships within the composition features."
-
-- **This statement is physically nonsensical.** Neural networks are ALSO capable of learning nonlinear relationships — they are universal function approximators. The actual reason tree-based models outperform here is likely: (a) the tabular nature of Magpie features (tree models are known to excel on tabular data), (b) insufficient hyperparameter tuning for neural networks, or (c) limited data for the number of classes.
+1. **Polymorphism:** How do you handle compositions with multiple possible structures?
+2. **Error cascade:** Space group is 77.2% correct. What happens to Wyckoff prediction when the space group is wrong?
+3. **Published baselines:** How do your numbers compare to existing work?
+4. **Where does the model fail?** Which materials or structures are hardest?
+5. **Did you check even ONE predicted structure with DFT?**
 
 ---
 
-> "Inclusion of space group's symmetry conditions when predicting Wyckoff's position led to accurate predictions..."
+> "Tree-based models achieved higher prediction accuracy compared to neural networks when predicting space group's symmetry due to the ability to learn the non-linear relationships..."
 
-- **Grammatically awkward:** "space group's symmetry conditions," "Wyckoff's position" — these are not possessives. It should be "space group symmetry" and "Wyckoff positions."
+- Neural networks also learn non-linear patterns. This reasoning is wrong. The real reason is likely that tree models handle tabular (Magpie) features better, or the neural network was not tuned well.
+
+---
+
+> "space group's symmetry conditions", "Wyckoff's position"
+
+- Wrong grammar. These are not possessives. Write "space group symmetry" and "Wyckoff positions."
 
 ---
 
@@ -555,92 +499,90 @@ This entire section is a **rehash of the results with no critical analysis**. Cl
 
 > "The predicted properties include formation energy, energy above hull, relative stability, volume per atom, space group, and Wyckoff positions."
 
-- Again mixing thermodynamic properties with structural descriptors as if they're the same thing.
+- Still mixing thermodynamic properties with structural properties as if they are the same thing.
 
 ---
 
-> "The proposed method will allow for large-scale screening of materials and form the foundation for future studies in crystal structure prediction and inverse material design."
+> "The proposed method will allow for large-scale screening of materials..."
 
-- **"Will allow"** — future tense. You haven't demonstrated it. No case study. No example of a novel material discovered. No DFT validation. This is **promissory, not scientific.**
+- **"Will allow"** — future tense. You have not shown this. No case study. No new material found. No DFT check. This is a promise, not a result.
 
 ---
 
-## 9. FIGURES — OVERALL CRITIQUE
+## 9. FIGURES
 
-- **Figure 1:** The pipeline diagram is fine conceptually but the example (SrTiO3 with a = 3.91 A) is a cherry-picked example of the ONE crystal system (cubic) where volume -> lattice parameter actually works. Try showing this for a monoclinic material.
-- **Figures 4, 5, 9, 10, 11, 12:** All have severe readability issues — too small, labels illegible, or lacking important annotations. Not publication-ready.
-- **No figure shows actual end-to-end pipeline performance.** You have 14 figures but none demonstrates the framework doing what the title claims.
+- **Figure 1:** The SrTiO3 example is cherry-picked because it is cubic — the only crystal system where volume gives you the lattice parameter. Try a monoclinic example and the method breaks.
+- **Figures 4, 5, 9, 10, 11, 12:** All have readability problems. Labels too small, text unreadable, missing labels. Not ready for publication.
+- **No figure shows the full pipeline working end-to-end.** 14 figures and none of them shows the paper's main claim actually working.
 
 ---
 
 ## 10. REFERENCES
 
-Only **17 references** for a paper claiming to survey and advance the field. This is woefully insufficient.
+Only **17 references** for a paper like this. Far too few.
 
-**Critical missing references:**
+**Missing important references:**
 
-- **Bartel et al.** — Critical examination of ML formation energy predictions (directly relevant to data leakage concerns)
-- **CrabNet (Wang et al.)** — State-of-the-art composition-based predictor
-- **Roost (Goodall & Lee)** — You cite it [4] but never benchmark against it
-- **ALIGNN (Choudhary & DeCost)** — Important GNN baseline
-- **USPEX, CALYPSO, AIRSS** — The actual crystal structure prediction methods you claim to replace
-- **Ward et al. (2016)** — The original Magpie paper, which you use extensively but never cite
-- **Any reference on polymorphism** — a topic you completely ignore despite it being the central challenge for composition-to-structure prediction
-- **GradNorm or uncertainty weighting for multi-task learning** — relevant to your Eq. (6) loss
-- **Tabular data benchmarks** (e.g., Grinsztajn et al., "Why do tree-based models still outperform deep learning on tabular data?") — relevant to your finding that RF beats MLP
+- **Bartel et al.** — About data leakage in ML for formation energy
+- **CrabNet (Wang et al.)** — Strong composition-based model to compare against
+- **Roost (Goodall & Lee)** — You cite it [4] but never compare to it
+- **ALIGNN (Choudhary & DeCost)** — Important baseline
+- **USPEX, CALYPSO, AIRSS** — The real crystal structure prediction methods
+- **Ward et al. (2016)** — The Magpie paper. You use Magpie everywhere but never cite it
+- **Anything about polymorphism** — you ignore this topic even though it is the core challenge
 
 ---
 
-## 11. SUMMARY OF CRITICAL FLAWS (Ranked by Severity)
+## 11. SUMMARY OF FLAWS
 
-### FATAL FLAWS:
+### FATAL FLAWS (must fix or paper cannot be readable):
 
-1. **Title claims "Crystal Structure Generation" but no structure is ever generated.** Wyckoff letters without free parameters and volume without individual lattice parameters are insufficient to construct a crystal structure for non-cubic systems.
-2. **Polymorphism is never addressed.** The composition -> structure mapping is fundamentally non-unique. This paper ignores the central challenge of its own problem statement.
-3. **No comparison with ANY published baseline.** Claims of "competitive performance" are unsubstantiated. The best formation energy MAE (0.0975 eV/atom) appears to be 2-3x worse than published composition-only baselines.
-4. **No end-to-end pipeline evaluation.** Individual model metrics are reported but cascading errors are never measured. What accuracy does the full pipeline achieve?
+1. **Title says "Crystal Structure Generation" but no structure is ever made.** Wyckoff letters without free parameters and volume without lattice parameters cannot give you a crystal structure (except for cubic).
+2. **Polymorphism is never discussed.** Same composition can give different structures. This is the core challenge and you ignore it.
+3. **No comparison with any published result.** You say "competitive" but compare against nothing.
+4. **No end-to-end test.** You test each model alone but never run the full pipeline and measure total error.
 
 ### MAJOR FLAWS:
 
-5. Contradictory dataset split descriptions (80/20 vs 80/10/10).
-6. Different dataset sizes for different tasks (150K, 101K, 210K) with no explanation.
-7. Section IV.G claims lattice parameters can be derived from volume alone — **wrong for non-cubic systems** (basic crystallography).
-8. Section IV.F claims atomic coordinates can be generated from Wyckoff letters — **wrong without free parameters** (basic crystallography).
-9. No DFT validation of any predicted structure.
-10. Multi-task loss (Eq. 6) has no task weighting — basic MTL mistake.
-11. Stability threshold is undefined ("typically close to 0 eV").
-12. References [3] and [4] are miscited — they are composition-only methods, contradicting the claim that current methods require crystal structure input.
-13. Six model variants with no ablation study or principled justification.
-14. No single-task baseline to demonstrate that multi-task learning actually helps.
+5. Dataset split is 80/20 in one place and 80/10/10 in another.
+6. Four different dataset sizes (150K, 101K, 210K, 151K) with no explanation.
+7. Claim that volume alone gives lattice parameters — wrong for non-cubic systems.
+8. Claim that Wyckoff letters give atomic coordinates — wrong without free parameters.
+9. No DFT validation of any prediction.
+10. Multi-task loss (Eq. 6) has no weights on different tasks.
+11. Stability threshold is vague ("typically close to 0 eV"). State the exact number.
+12. Refs [3] and [4] are cited wrongly — they are composition-only methods but you say they need crystal structures.
+13. Six model variants with no ablation study.
+14. No single-task baseline to prove multi-task learning helps.
 
 ### MINOR FLAWS:
 
-15. Multiple typos ("mrethod", "density of functional theory").
-16. Inconsistent feature counts (130-140 vs 138).
-17. Overclaimed uncertainty correlation (0.64 called "strong"; 0.52 not addressed as weak).
-18. "Physics-informed" used incorrectly.
-19. Discussion section adds no analytical content beyond restating results.
-20. Contribution #5 written in future tense.
-21. "etc." used in feature list — unacceptable in a scientific paper.
-22. Figures are largely unreadable at publication resolution.
-23. "space group's symmetry" and "Wyckoff's position" — incorrect possessive grammar.
-24. Figure 14 contradicts the text's claim of "remarkable alignment."
+15. Typos: "mrethod", "density of functional theory."
+16. Feature count changes: "130-140" then "138."
+17. Correlation of 0.64 called "strong" (it is moderate).
+18. "Physics-informed" used wrongly.
+19. Discussion just repeats results.
+20. Contribution #5 in future tense.
+21. "etc." in a feature list — not OK in a paper.
+22. Most figures are too small to read.
+23. "space group's symmetry" and "Wyckoff's position" are wrong grammar.
+24. Figure 14 shows poor agreement but text says "remarkably well."
 
 ---
 
-## 12. RECOMMENDATIONS FOR REVISION
+## 12. WHAT TO DO NEXT
 
-1. **Be honest about what the paper does.** Rename the paper to reflect prediction of descriptors, not structure generation. Or actually generate structures and validate them.
-2. **Benchmark against published results.** Include a comparison table with Roost, CrabNet, and the space group prediction papers you cite.
-3. **Address polymorphism explicitly.** Discuss how the framework handles (or fails to handle) compositions with multiple stable structures.
-4. **Report end-to-end pipeline performance.** Chain all four models and report the cascading error.
-5. **Fix the physics errors.** Volume alone cannot determine lattice parameters for non-cubic systems. Wyckoff letters without free parameters cannot give atomic coordinates.
-6. **Provide missing details.** Exact stability threshold, exact feature count, exact dataset sizes, Materials Project API version, split strategy, hyperparameters.
-7. **Add proper baselines.** Naive physics baselines (e.g., average atomic radius for volume), majority class baseline for stability, published model results for formation energy and space group.
-8. **Rewrite the paper in your own voice.** Remove LLM boilerplate. Add genuine scientific depth and honest discussion of limitations.
-9. **Fix all figures.** Readable axis labels, proper annotations, element labels on t-SNE, legible confusion matrices.
-10. **Expand references.** At least 30-40 references for a paper of this scope, including the missing critical references listed above.
+1. **Fix the title.** Either remove "Generation" or actually generate structures and check them with DFT.
+2. **Compare your results to published work.** Add a table with your numbers next to Roost, CrabNet, and the space group papers you cite.
+3. **Talk about polymorphism.** How do you handle compositions with multiple possible structures?
+4. **Test the full pipeline end-to-end.** Chain all four models and report the total error.
+5. **Fix the physics mistakes.** Volume alone does not give lattice parameters for non-cubic systems. Wyckoff letters without free parameters do not give coordinates.
+6. **Add missing details.** Exact stability threshold, exact feature count, exact dataset sizes, Materials Project version, split method, all hyperparameters.
+7. **Add simple baselines.** Average atomic radius for volume, majority class for stability, published results for all tasks.
+8. **Rewrite in your own words.** Remove the LLM language. Add real scientific thinking and honest discussion of what does NOT work.
+9. **Fix all figures.** Readable labels, element names on t-SNE, readable confusion matrix.
+10. **Add more references.** At least 30-40 for a paper like this.
 
 ---
 
-**Bottom line:** This paper describes a collection of standard ML models applied to Materials Project data with no novel methodology, no comparison to baselines, no physical validation, and a central claim (structure generation) that is not supported by the actual work. It needs **fundamental restructuring**, not just editing. The students should: (1) be honest about what the paper actually does, (2) benchmark against published results, (3) address polymorphism, (4) demonstrate end-to-end performance with error propagation, (5) fix the crystallographic errors in Sections IV.F and IV.G, and (6) rewrite the paper in their own words with genuine technical depth.
+**Bottom line:** This paper is a collection of standard ML models run on Materials Project data. There is no new method, no comparison with existing work, no physical check, and the main claim (structure generation) is not true. The paper needs major rework: (1) be honest about what the paper actually does, (2) compare against published results, (3) talk about polymorphism, (4) test the full pipeline with error build-up, (5) fix the crystallography mistakes in Sections IV.F and IV.G, and (6) rewrite everything in your own words with real depth.
